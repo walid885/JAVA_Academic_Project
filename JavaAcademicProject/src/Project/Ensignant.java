@@ -13,6 +13,10 @@ public class Ensignant {
     private String nom;
     private String contact;
 
+    public Ensignant() {
+      
+    }
+
     public Ensignant(int matricule, String nom, String contact) {
         this.matricule = matricule;
         this.nom = nom;
@@ -81,6 +85,64 @@ public class Ensignant {
     }
 
 
+    public static void updateContact(Ensignant ensignant, String newContact) {
+        ensignant.setContact(newContact);
+    }
+
+    public static void updateMatricule(Ensignant ensignant, int newMatricule) {
+        ensignant.setMatricule(newMatricule);
+    }
+
+    public static void updateNom(Ensignant ensignant, String newNom) {
+        ensignant.setNom(newNom);
+    }
+
+    public static void updateEnsignant(Ensignant ensignant, String newContact, int newMatricule, String newNom) {
+        ensignant.setContact(newContact);
+        ensignant.setMatricule(newMatricule);
+        ensignant.setNom(newNom);
+    }
+    
+
+    public   Ensignant getEnsignantByMatricule(int matricule) {
+        Ensignant enseignant = null;
+        // Connect to the database
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_management", "root", "PASSword1234!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Create a prepared statement to select the Ensignant data by matricule
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("SELECT * FROM enseignants WHERE matricule = ?");
+            ps.setInt(1, matricule);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                enseignant = new Ensignant(rs.getInt("matricule"), rs.getString("nom"), rs.getString("contact"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return enseignant;
+    }
 
 
 }

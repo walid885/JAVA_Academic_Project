@@ -203,6 +203,26 @@ public class Project {
         return enseignant;
     }
 
+    
+    public void updateContact(Ensignant ensignant, String newContact) {
+        ensignant.setContact(newContact);
+    }
+
+    public void updateMatricule(Ensignant ensignant, int newMatricule) {
+        ensignant.setMatricule(newMatricule);
+    }
+
+    public void updateNom(Ensignant ensignant, String newNom) {
+        ensignant.setNom(newNom);
+    }
+
+    public void updateEnsignant(Ensignant ensignant, String newContact, int newMatricule, String newNom) {
+        ensignant.setContact(newContact);
+        ensignant.setMatricule(newMatricule);
+        ensignant.setNom(newNom);
+    }
+    
+    
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -216,12 +236,20 @@ public class Project {
 	    List<Ensignant> allEnsignants = getAllEnsignants();
 
 	    System.out.println("Ensignant 2: " + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
-	    System.out.println("Ensignant 3: " + e3.toString());
+	    System.out.println("Ensignant 3: " +e3.getMatricule()  +" "+ e3.getContact()+" "+  e3.getNom());
 	    System.out.println("Ensignant 4: " + e4.toString());
 	    System.out.println("All Ensignants: " + allEnsignants.toString());
 
 
-	    
+	    e2.updateNom(e2, "updatenom");
+	    System.out.println("Ensignant 2: after update nom :\n" + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
+	    e2.updateContact(e2, "updatecontact");;
+	    System.out.println("Ensignant 2: after update contact :\n" + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
+	    e2.updateMatricule(e2, 55);
+	    System.out.println("Ensignant 2: after update matricule :\n" + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
+	    e2.updateEnsignant(e2, "bobsmith@example.com", 3, "BOB SMITH");
+	    System.out.println("Ensignant 2: after full update \n " + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
+
 	}
 
 }
