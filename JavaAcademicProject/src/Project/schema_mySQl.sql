@@ -1,4 +1,8 @@
 -- the schema of the db is given down below 
+-- database name : timetable_management
+--SHOW DATABASES; in order to show the databases , 
+--  use  timetable_management : in order to use that specified database ; 
+
 
 --CREATE TABLE enseignants ( matricule integer primary key, nom varchar(50), contact varchar(50));
 
