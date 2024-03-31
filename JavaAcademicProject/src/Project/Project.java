@@ -204,24 +204,153 @@ public class Project {
     }
 
     
+    public void updateNom(Ensignant ensignant, String newNom) {
+        // Connect to the database
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_management", "root", "PASSword1234!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Create a prepared statement to update the nom
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("UPDATE enseignants SET nom = ? WHERE matricule = ?");
+            ps.setString(1, newNom);
+            ps.setInt(2, ensignant.getMatricule());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void updateContact(Ensignant ensignant, String newContact) {
-        ensignant.setContact(newContact);
+        // Connect to the database
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_management", "root", "PASSword1234!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Create a prepared statement to update the contact
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("UPDATE enseignants SET contact = ? WHERE matricule = ?");
+            ps.setString(1, newContact);
+            ps.setInt(2, ensignant.getMatricule());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void updateMatricule(Ensignant ensignant, int newMatricule) {
-        ensignant.setMatricule(newMatricule);
+        // Connect to the database
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_management", "root", "PASSword1234!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Create a prepared statement to update the matricule
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("UPDATE enseignants SET matricule = ? WHERE matricule = ?");
+            ps.setInt(1, newMatricule);
+            ps.setInt(2, ensignant.getMatricule());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    public void updateNom(Ensignant ensignant, String newNom) {
-        ensignant.setNom(newNom);
-    }
-
-    public void updateEnsignant(Ensignant ensignant, String newContact, int newMatricule, String newNom) {
-        ensignant.setContact(newContact);
-        ensignant.setMatricule(newMatricule);
-        ensignant.setNom(newNom);
-    }
     
+    public static Ensignant deleteEnsignantByMatricule(int matricule) {
+        // Connect to the database
+        Connection conn = null;
+        Ensignant enseignant = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_management", "root", "PASSword1234!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Create a prepared statement to delete the Ensignant data by matricule
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement("DELETE FROM enseignants WHERE matricule = ?");
+            ps.setInt(1, matricule);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return enseignant;
+    }
+
     
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -247,8 +376,13 @@ public class Project {
 	    System.out.println("Ensignant 2: after update contact :\n" + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
 	    e2.updateMatricule(e2, 55);
 	    System.out.println("Ensignant 2: after update matricule :\n" + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
-	    e2.updateEnsignant(e2, "bobsmith@example.com", 3, "BOB SMITH");
-	    System.out.println("Ensignant 2: after full update \n " + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
+	    //e3 = getEnsignantByMatricule(55); 
+	    //System.out.println("Ensignant 3: after update nom :\n" + e3.getMatricule()  +" "+ e3.getContact()+" "+  e3.getNom());
+
+	   // e2.updateEnsignant(e2, "bobsmith@example.com", 3, "BOB SMITH");
+	    //System.out.println("Ensignant 2: after full update \n " + e2.getMatricule()  +" "+ e2.getContact()+" "+  e2.getNom());
+	    
+	    //e2 = deleteEnsignantByMatricule(3);
 
 	}
 
