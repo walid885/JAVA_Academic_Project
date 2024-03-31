@@ -1,0 +1,1 @@
+in order so that the project works , we need to setup the mysql JDBC 
