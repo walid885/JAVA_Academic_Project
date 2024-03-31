@@ -7,10 +7,11 @@ import Project.Ensignant;
 public class Project {
 	
 	public static void addEnsignant(Ensignant ensignant) {
+
 	    // Connect to the database
 	    Connection conn = null;
 	    try {
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_management", "username", "password");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/timetable_management", "root", "PASSword1234!");
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
@@ -45,6 +46,14 @@ public class Project {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("try phase after the line 50");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 	    Ensignant e1 = new Ensignant(10, "test", "jtestes.com");
 	    addEnsignant(e1);

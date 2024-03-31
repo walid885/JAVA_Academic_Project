@@ -1,1 +1,6 @@
 in order so that the project works , we need to setup the mysql JDBC 
+
+after setting up the project, and hours of searching the problem, you have to change the root passowrd , using those commands in this link 
+https://stackoverflow.com/questions/11922323/java-sql-sqlexception-access-denied-for-user-rootlocalhost-using-password
+after that , there is a warning of deprectaed library, but, if it works , don't touch it hehe 
+hence, the issue of the connectivity is solved, and now , i am able to access the database and add uesrs. 
